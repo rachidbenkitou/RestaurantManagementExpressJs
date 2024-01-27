@@ -1,27 +1,19 @@
-const express = require("express")
-const dotenv = require("dotenv")
-const prisma= require("./db/prisma")
+const express = require("express");
+const dotenv = require("dotenv");
+const { errorHandler } = require("./middlewares/error.middleware");
+const { productRouter } = require("./routes/product.routes");
 
-dotenv.config()
-const app = express()
-const port = 3000
+dotenv.config();
+const app = express();
+const port = 3000;
 
-app.get('/', async (req, res) => {
-    await prisma.user.create({
-        data: {
-            name: "John Doe",
-            email: "jondoe@gmail.com",
-            password: "123456"
-        }
-    });
+// Use middleware and setup
+app.use(express.json());
 
-    const users = await prisma.user.findMany()
-    const names = users.map((user) => user.name)
+// Use routes
+app.use("/api/v1/products", productRouter);
 
-    res.send(
-        `There are ${names.length} users with the names of ${names.join(", ")}`
-    )
+// Error Handling
+app.use(errorHandler);
 
-});
-
-app.listen(port, () => console.log(`App listening on port ${port}`))
+app.listen(port, () => console.log(`App listening on port ${port}`));
