@@ -1,7 +1,8 @@
 const express = require("express");
 const dotenv = require("dotenv");
-const { errorHandler } = require("./middlewares/error.middleware");
-const { productRouter } = require("./routes/product.routes");
+const {productRouter} = require("./project/routes/product.routes");
+const {errorHandler} = require("./project/middlewares/error.middleware");
+
 
 dotenv.config();
 const app = express();
