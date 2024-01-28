@@ -4,43 +4,43 @@ const errorHandler = (error, req, res, next) => {
     switch (statusCode) {
         case 400:
             res.status(statusCode).json({
+                status: statusCode,
                 message: error.message,
-                error: error.details,
                 timstamp: new Date(),
-                stackTrace: error.stack,
+                // stackTrace: error.stack,
             });
             break;
         case 404:
             res.status(statusCode).json({
-                Title: "Not Found",
+                status: statusCode,
                 message: error.message,
-                error: error.details,
                 timstamp: new Date(),
-                stackTrace: error.stack,
+                // stackTrace: error.stack,
             });
             break;
         case 409:
             res.status(statusCode).json({
-                Title: "Conflict Error",
+                status: statusCode,
                 message: error.message,
                 timstamp: new Date(),
-                stackTrace: error.stack,
+                // stackTrace: error.stack,
             });
             break;
         case 401:
             res.status(statusCode).json({
-                Title: "Unauthorized",
+                status: statusCode,
                 message: error.message,
                 timstamp: new Date(),
-                stackTrace: error.stack,
+                // stackTrace: error.stack,
             });
             break;
 
         default:
             res.status(statusCode).json({
-                message: "Internale Server Error",
+                status: statusCode,
+                message: error.message,
                 timstamp: new Date(),
-                stackTrace: error.stack,
+                // stackTrace: error.stack,
             });
             break;
     }
