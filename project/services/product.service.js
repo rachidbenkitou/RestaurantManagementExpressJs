@@ -2,32 +2,67 @@ const CustomError = require("../exceptions/customError");
 const {
     addProductRepository,
     findProductsRepository,
-    productExistsByNameRepository
+    productExistsByNameRepository, findProductByIdRepository, updateProductRepository, deleteProductByIdRepository
 } = require("../repositories/prodcut.repository");
 
 const getAllProductsService = async () => {
-    try {
-        return await findProductsRepository();
-    } catch (error) {
-        throw new CustomError("Error while executing findProducts function", 500);
+    return findProductsRepository();
+};
+
+const findProductByIdService = async (productId) => {
+    // Check if a product with the given ID exists
+    const existingProduct = await findProductByIdRepository(productId);
+
+    if (!existingProduct) {
+        throw new CustomError("Product not found", 404);
     }
+
+    // If the product exists, return it
+    return existingProduct;
 };
 
 const addProductService = async (newProduct) => {
-        // Check if a product with the same name already exists
-        const productExists = await productExistsByNameRepository(newProduct.name);
+    // Check if a product with the same name already exists
+    const productExists = await productExistsByNameRepository(newProduct.name);
 
-        if (productExists) {
-            throw new CustomError("Product already exists", 400); // You can choose an appropriate status code
-        }
+    if (productExists) {
+        throw new CustomError("Product already exists", 400); // You can choose an appropriate status code
+    }
 
-        // If the product doesn't exist, proceed with creating a new one
-        return addProductRepository(newProduct);
+    // If the product doesn't exist, proceed with creating a new one
+    return addProductRepository(newProduct);
 
 };
 
+const updateProductService = async (productId, updatedProduct) => {
 
+    // Check if a product with the given ID exists
+    const existingProduct = await findProductByIdRepository(productId);
+
+    if (!existingProduct) {
+        throw new CustomError("Product not found", 404); // You can choose an appropriate status code
+    }
+
+    // If the product exists, proceed with updating it
+    return updateProductRepository(productId, updatedProduct);
+
+};
+
+const deleteProductByIdService = async (productId) => {
+    // Check if a product with the given ID exists
+    const existingProduct = await findProductByIdRepository(productId);
+
+    if (!existingProduct) {
+        throw new CustomError("Product not found", 404);
+    }
+
+    // If the product exists, proceed with deleting it
+    await deleteProductByIdRepository(productId);
+};
 module.exports = {
     getAllProductsService,
-    addProductService
+    findProductByIdService,
+    addProductService,
+    updateProductService,
+    deleteProductByIdService
 };

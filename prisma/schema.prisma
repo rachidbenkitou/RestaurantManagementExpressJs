@@ -13,30 +13,32 @@ datasource db {
 // ######################## Rachid Benkitou ########################
 // Product entity
 model Product {
-  id          Int       @id @default(autoincrement())
+  id          Int            @id @default(autoincrement())
   name        String
   price       Float
   isAvailable Boolean
+  categoryId  Int
   images      Image[]
   orders      ProductOrder[]
+  category    Category       @relation(fields: [categoryId], references: [id])
 }
 
 // Image entity
 model Image {
-  id       Int    @id @default(autoincrement())
-  name     String
-  type     String
-  path     String
+  id        Int     @id @default(autoincrement())
+  name      String
+  type      String
+  path      String
   productId Int
-  product  Product @relation(fields: [productId], references: [id])
+  product   Product @relation(fields: [productId], references: [id])
 }
 
 // Order entity
 model Order {
-  id     Int       @id @default(autoincrement())
-  date   DateTime
-  status String
-  type   String
+  id       Int            @id @default(autoincrement())
+  date     DateTime
+  status   String
+  type     String
   products ProductOrder[]
 }
 
@@ -53,9 +55,15 @@ model ProductOrder {
 }
 
 // ######################## Your Name ########################
+model Category {
+  id       Int       @id @default(autoincrement())
+  name     String
+  image    String
+  products Product[]
+}
 
 model User {
-  id       Int @id @default(autoincrement())
+  id       Int    @id @default(autoincrement())
   name     String
   email    String
   password String

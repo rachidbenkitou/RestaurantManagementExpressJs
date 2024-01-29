@@ -24,9 +24,32 @@ const productExistsByNameRepository = async (productName) => {
     return !!existingProduct; // Returns true if the product with the given name exists, false otherwise
 };
 
+
+const findProductByIdRepository = async (productId) => {
+    return prisma.product.findUnique({
+        where: { id: productId },
+    });
+};
+
+const updateProductRepository = async (productId, updatedProduct) => {
+    return prisma.product.update({
+        where: { id: productId },
+        data: updatedProduct,
+    });
+};
+
+
+const deleteProductByIdRepository = async (productId) => {
+    return prisma.product.delete({
+        where: { id: productId },
+    });
+};
 module.exports = {
     findProductsRepository,
     addProductRepository,
     findProductByNameRepository,
-    productExistsByNameRepository
+    productExistsByNameRepository,
+    findProductByIdRepository,
+    updateProductRepository,
+    deleteProductByIdRepository
 };
