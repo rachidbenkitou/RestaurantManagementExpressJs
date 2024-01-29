@@ -40,7 +40,7 @@ const errorHandler = (error, req, res, next) => {
                 status: statusCode,
                 message: error.message,
                 timstamp: new Date(),
-                // stackTrace: error.stack,
+                stackTrace: error.stack,
             });
             break;
     }

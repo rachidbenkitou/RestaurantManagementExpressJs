@@ -31,6 +31,13 @@ const findProductByIdRepository = async (productId) => {
     });
 };
 
+const findProductsByCategoryIdRepository = async (categoryId) => {
+    return prisma.product.findMany({
+        where: {
+            categoryId: categoryId,
+        },
+    });
+};
 const updateProductRepository = async (productId, updatedProduct) => {
     return prisma.product.update({
         where: { id: productId },
@@ -51,5 +58,6 @@ module.exports = {
     productExistsByNameRepository,
     findProductByIdRepository,
     updateProductRepository,
-    deleteProductByIdRepository
+    deleteProductByIdRepository,
+    findProductsByCategoryIdRepository
 };

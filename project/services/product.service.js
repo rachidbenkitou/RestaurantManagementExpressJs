@@ -2,7 +2,8 @@ const CustomError = require("../exceptions/customError");
 const {
     addProductRepository,
     findProductsRepository,
-    productExistsByNameRepository, findProductByIdRepository, updateProductRepository, deleteProductByIdRepository
+    productExistsByNameRepository, findProductByIdRepository, updateProductRepository, deleteProductByIdRepository,
+    findProductsByCategoryIdRepository
 } = require("../repositories/prodcut.repository");
 
 const getAllProductsService = async () => {
@@ -19,6 +20,10 @@ const findProductByIdService = async (productId) => {
 
     // If the product exists, return it
     return existingProduct;
+};
+
+const findProductsByCategoryIdService = async (categoryId) => {
+        return findProductsByCategoryIdRepository(categoryId);
 };
 
 const addProductService = async (newProduct) => {
@@ -64,5 +69,6 @@ module.exports = {
     findProductByIdService,
     addProductService,
     updateProductService,
-    deleteProductByIdService
+    deleteProductByIdService,
+    findProductsByCategoryIdService
 };
