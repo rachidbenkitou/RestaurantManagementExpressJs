@@ -36,6 +36,10 @@ model Image {
 // Order entity
 model Order {
   id       Int            @id @default(autoincrement())
+  name     String
+  phone    String
+  address  String
+  price    Float
   date     DateTime
   status   String
   type     String
