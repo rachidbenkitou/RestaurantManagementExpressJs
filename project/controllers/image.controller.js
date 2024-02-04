@@ -7,7 +7,7 @@ const addImageController = async (req, res, next) => {
 
         res.status(201).json(addedImage);
     } catch (error) {
-        if (!error instanceof CustomError) {
+        if (!(error instanceof CustomError)) {
             res.status(error.statusCode).json({error: error.message});
         } else {
             next(error);
@@ -23,7 +23,7 @@ const deleteImageController = async (req, res, next) => {
 
         res.status(200).json({message: "Image deleted successfully"});
     } catch (error) {
-        if (!error instanceof CustomError) {
+        if (!(error instanceof CustomError)) {
             res.status(error.statusCode).json({error: error.message});
         } else {
             next(error);
@@ -38,7 +38,7 @@ const findImagesByProductIdController = async (req, res, next) => {
 
         res.status(200).json(images);
     } catch (error) {
-        if (!error instanceof CustomError) {
+        if (!(error instanceof CustomError)) {
             res.status(error.statusCode).json({error: error.message});
         } else {
             next(error);

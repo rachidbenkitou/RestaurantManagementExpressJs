@@ -5,6 +5,7 @@ const {errorHandler} = require("./project/middlewares/error.middleware");
 const {imageRouter} = require("./project/routes/image.routes");
 const {orderRouter} = require("./project/routes/order.routes");
 const {productOrderRouter} = require("./project/routes/productOrder.routes");
+const {categoryRouter} = require("./project/routes/category.routes");
 
 
 dotenv.config(); // Load environment variables from a .env file if present
@@ -32,6 +33,7 @@ app.use("/api/v1/products", productRouter);
 app.use("/api/v1/images", imageRouter);
 app.use("/api/v1/orders", orderRouter);
 app.use("/api/v1/productOrders", productOrderRouter);
+app.use("/api/v1/categories", categoryRouter);
 
 // Error Handling
 app.use(errorHandler);

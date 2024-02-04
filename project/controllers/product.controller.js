@@ -10,7 +10,7 @@ const findAllProducts = async (req, res, next) => {
         const products = await getAllProductsService();
         res.status(200).json(products);
     } catch (error) {
-        if (!error instanceof CustomError) {
+        if (!(error instanceof CustomError)) {
             // Handle custom errors
             res.status(error.statusCode).json({error: error.message});
         } else {
@@ -29,7 +29,7 @@ const findProductByIdController = async (req, res, next) => {
 
         res.status(200).json(product);
     } catch (error) {
-        if (!error instanceof CustomError) {
+        if (!(error instanceof CustomError)) {
             res.status(error.statusCode).json({ error: error.message });
         } else {
             // Handle other unexpected errors
@@ -44,7 +44,7 @@ const findProductsByCategoryIdController = async (req, res, next) => {
         const products = await findProductsByCategoryIdService(parseInt(categoryId, 10));
         res.status(200).json(products);
     } catch (error) {
-        if (!error instanceof CustomError) {
+        if (!(error instanceof CustomError)) {
             res.status(error.statusCode).json({ error: error.message });
         } else {
             next(error);
@@ -59,7 +59,7 @@ const addProductController = async (req, res, next) => {
 
         res.status(201).json(createdProduct);
     } catch (error) {
-        if (!error instanceof CustomError) {
+        if (!(error instanceof CustomError)) {
             res.status(error.statusCode).json({error: error.message});
         } else {
             next(error);
@@ -76,7 +76,7 @@ const updateProductController = async (req, res, next) => {
 
         res.status(200).json(updatedProductResult);
     } catch (error) {
-        if (!error instanceof CustomError) {
+        if (!(error instanceof CustomError)) {
             res.status(error.statusCode).json({error: error.message});
         } else {
             next(error);
@@ -91,7 +91,7 @@ const deleteProductByIdController = async (req, res, next) => {
 
         res.json({message: "Product deleted successfully"});
     } catch (error) {
-        if (!error instanceof CustomError) {
+        if (!(error instanceof CustomError)) {
             res.status(error.statusCode).json({error: error.message});
         } else {
             next(error);

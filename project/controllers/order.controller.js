@@ -10,7 +10,7 @@ const findAllOrdersController = async (req, res, next) => {
         const orders = await findAllOrdersService();
         res.status(200).json(orders);
     } catch (error) {
-        if (!error instanceof CustomError) {
+        if (!(error instanceof CustomError)) {
             res.status(error.statusCode).json({error: error.message});
         } else {
             next(error);
@@ -24,7 +24,7 @@ const findOrderByIdController = async (req, res, next) => {
         const order = await findOrderByIdService(orderId);
         res.status(200).json(order);
     } catch (error) {
-        if (!error instanceof CustomError) {
+        if (!(error instanceof CustomError)) {
             res.status(error.statusCode).json({error: error.message});
         } else {
             next(error);
@@ -38,7 +38,7 @@ const addOrderController = async (req, res, next) => {
         const result = await addOrderService(newOrder);
         res.status(201).json(result);
     } catch (error) {
-        if (!error instanceof CustomError) {
+        if (!(error instanceof CustomError)) {
             res.status(error.statusCode).json({error: error.message});
         } else {
             next(error);
@@ -53,7 +53,7 @@ const updateOrderController = async (req, res, next) => {
         const result = await updateOrderService(orderId, updatedOrder);
         res.json(result);
     } catch (error) {
-        if (!error instanceof CustomError) {
+        if (!(error instanceof CustomError)) {
             res.status(error.statusCode).json({error: error.message});
         } else {
             next(error);
@@ -67,7 +67,7 @@ const findOrdersByDateController = async (req, res, next) => {
         const orders = await findOrdersByDateService(targetDate);
         res.json(orders);
     } catch (error) {
-        if (!error instanceof CustomError) {
+        if (!(error instanceof CustomError)) {
             res.status(error.statusCode).json({error: error.message});
         } else {
             next(error);
@@ -81,7 +81,7 @@ const acceptOrderController = async (req, res, next) => {
         const result = await acceptOrderService(orderId);
         res.json(result);
     } catch (error) {
-        if (!error instanceof CustomError) {
+        if (!(error instanceof CustomError)) {
             res.status(error.statusCode).json({error: error.message});
         } else {
             next(error);
@@ -95,7 +95,7 @@ const cancelOrderController = async (req, res, next) => {
         const result = await cancelOrderService(orderId);
         res.json(result);
     } catch (error) {
-        if (!error instanceof CustomError) {
+        if (!(error instanceof CustomError)) {
             res.status(error.statusCode).json({error: error.message});
         } else {
             next(error);
