@@ -2,7 +2,11 @@ const {PrismaClient} = require('@prisma/client');
 
 const prisma = new PrismaClient();
 const findProductsRepository = async () => {
-    return prisma.product.findMany({});
+    return prisma.product.findMany({
+        include: {
+            category: true, // Assuming there is a "category" relation in your Product model
+        },
+    });
 };
 
 const addProductRepository = async (newProduct) => {

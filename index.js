@@ -6,6 +6,7 @@ const {imageRouter} = require("./project/routes/image.routes");
 const {orderRouter} = require("./project/routes/order.routes");
 const {productOrderRouter} = require("./project/routes/productOrder.routes");
 const {categoryRouter} = require("./project/routes/category.routes");
+const cors = require("cors");
 
 
 dotenv.config(); // Load environment variables from a .env file if present
@@ -27,6 +28,9 @@ By using this middleware, you can conveniently work with the parsed JSON data in
   the information sent by clients in their requests.
 * */
 app.use(express.json());
+
+// Use the cors middleware
+app.use(cors());
 
 // Use routes
 app.use("/api/v1/products", productRouter);
